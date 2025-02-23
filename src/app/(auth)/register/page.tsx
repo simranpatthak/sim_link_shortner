@@ -1,9 +1,9 @@
 import AuthPage from '@/components/base/AuthPage'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const Register = () => {
   return (
-    <div><AuthPage type={"register"}/></div>
+    <Suspense fallback={<div>Loading...</div>}><AuthPage type={"register"}/></Suspense>
   )
 }
 
