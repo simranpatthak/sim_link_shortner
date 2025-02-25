@@ -81,7 +81,7 @@ export default function Dashboard() {
       <div className="flex gap-4">
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-blue-600 hover:bg-blue-500 text-white">
+            <Button className="bg-violet-900 hover:bg-violet-700 text-white">
               Shorten a Link
             </Button>
           </DialogTrigger>
@@ -99,7 +99,7 @@ export default function Dashboard() {
 
             <Button 
               onClick={shortenLink} 
-              className="mt-4 bg-green-600 hover:bg-green-500 text-white"
+              className="mt-4 bg-violet-900 hover:bg-violet-700 text-white"
               disabled={loading}
             >
               {loading ? "Generating..." : "Generate Short Link"}
@@ -118,7 +118,7 @@ export default function Dashboard() {
           </DialogContent>
         </Dialog>
 
-        <Button onClick={() => router.push("/logs")} className="bg-gray-800 hover:bg-gray-700 text-white">
+        <Button onClick={() => router.push("/logs")} className="border-2 border-violet-700 bg-transparent hover:bg-violet-700 hover:text-white text-black">
           View Logs
         </Button>
       </div>

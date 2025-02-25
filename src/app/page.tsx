@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen flex flex-col justify-center px-6 ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"}`}>
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-10 py-16">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-10 py-8">
         <motion.div 
           className="max-w-lg text-left"
           initial={{ opacity: 0, x: -50 }}
@@ -40,16 +40,18 @@ export default function Home() {
           transition={{ delay: 0.3, duration: 0.8 }}
         >
           <Image 
-            src="/landing.jpg" 
+            src="/landing.svg" 
             alt="Link Shortening Illustration" 
             width={600} 
             height={400} 
-            className="rounded-lg shadow-lg"
+           
           />
         </motion.div>
       </div>
+<div>
+        <h1 className="text-2xl md:text-4xl text-center font-bold mb-2">Why Simlinks ?</h1>
 
-      <div className="mt-16 grid md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
+      <div className="mt-8 grid md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
         {["Track Clicks", "Secure & Encrypted", "Manage Links"].map((title, i) => (
           <Card key={i} className="bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 p-6 text-center">
             <CardContent>
@@ -62,7 +64,8 @@ export default function Home() {
             </CardContent>
           </Card>
         ))}
-      </div>
+</div>
+</div>
     </div>
   );
 }

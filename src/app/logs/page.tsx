@@ -12,7 +12,7 @@ export default function Logs() {
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
+const [loadingDelete, setLoadingDelete] = useState<boolean>(false)
   useEffect(() => {
     fetchLinks();
   }, []);
@@ -32,13 +32,15 @@ export default function Logs() {
   const handleDelete = async () => {
     if (!deleteId) return;
     try {
+      setLoadingDelete(true)
       await axios.delete(`/api/links/${deleteId}`);
-      toast.success("Link deleted successfully!");
       setLinks(links.filter(link => link._id !== deleteId));
+      setLoadingDelete(false)
     } catch (error) {
-      toast.error("Failed to delete link!");
+      setLoadingDelete(false)
     } finally {
       setDeleteId(null);
+      setLoadingDelete(false)
     }
   };
 
@@ -111,7 +113,7 @@ export default function Logs() {
           <p>This action cannot be undone.</p>
           <DialogFooter>
             <Button onClick={() => setDeleteId(null)}>Cancel</Button>
-            <Button onClick={handleDelete} className="bg-red-500 hover:bg-red-600">Delete</Button>
+            <Button onClick={handleDelete} className="bg-red-500 hover:bg-red-600">{loadingDelete?"Deleting...":"Delete"}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

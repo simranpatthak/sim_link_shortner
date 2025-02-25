@@ -1,0 +1,19 @@
+/* Default NProgress Styling Override */
+#nprogress {
+    pointer-events: none;
+  }
+  
+  #nprogress .bar {
+    background: #ad15e9 !important; /* Loader Color (Blue) */
+    height: 3px !important; /* Loader Thickness */
+    position: fixed;
+    top: 60px !important; /* Navbar ke neeche fix */
+    z-index: 9999;
+  }
+  
+  /* Spinner Hide */
+  #nprogress .peg,
+  #nprogress .spinner {
+    display: none !important;
+  }
+  
