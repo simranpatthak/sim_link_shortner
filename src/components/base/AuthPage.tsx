@@ -163,7 +163,8 @@ export default function AuthPage({ type }: AuthPageProps) {
             }
           </form>
           <div className="mt-4">
-            <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
+            <Button   onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+ className="w-full bg-red-600 hover:bg-red-700 text-white">
               Login using Google
             </Button>
           </div>

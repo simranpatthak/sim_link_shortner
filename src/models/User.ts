@@ -11,7 +11,6 @@ const userSchema = new Schema({
         unique: true
     },
     password: {
-        required: [true, "password is required"],
         type: Schema.Types.String    
     },
     
