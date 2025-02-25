@@ -1,24 +1,24 @@
 import { connect } from "@/database/mongo.config";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/options";
 import { Link } from "@/models/Links";
-import { auth } from "@/lib/auth";
+import { authOptions } from "../../auth/[...nextauth]/options";
 
-export async function GET(request: NextRequest, response:NextResponse) {
+export async function GET(request: NextRequest) {
   try {
     await connect();
 
- const session =await getServerSession(request,response,authOptions); 
-    console.log(session)
-    console.log("Session Data:", session); // Debugging log
-
+ const session =await getServerSession(authOptions); 
+ console.log("----------",session);
+ 
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const userLinks = await Link.find({ userId: session.user.id }).sort({ createdAt: -1 });
-
+    const userId = session?.user?.id;
+    if (!userId) return;
+    const userLinks = await Link.find({ userId }).sort({ createdAt: -1 });
+    
     return NextResponse.json({ data: userLinks }, { status: 200 });
   } catch (error) {
     console.error("GET Error:", error);

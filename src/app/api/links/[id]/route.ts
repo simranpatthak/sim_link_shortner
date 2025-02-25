@@ -3,14 +3,13 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { Link } from "@/models/Links";
-import { auth } from "@/lib/auth";
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await connect();
 
     // ✅ Corrected: Use getServerSession(authOptions)
-    const session = await auth(); 
+    const session =await getServerSession(authOptions); 
     console.log(session);
     
     if (!session) {
@@ -18,7 +17,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     // ✅ Ensure session has user data
-    if (!session.user || !session.user.id) {
+    if (!session.user || !session.user.id ) {
       return NextResponse.json({ error: "Invalid session" }, { status: 400 });
     }
 

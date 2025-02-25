@@ -5,72 +5,63 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 export default function Home() {
   const router = useRouter();
+  const { theme } = useTheme();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-900 to-gray-800 text-white px-6">
-      <motion.h1 
-        className="text-4xl md:text-6xl font-bold text-center mb-6"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Welcome to Sim-Link
-      </motion.h1>
-      
-      <motion.p 
-        className="text-lg text-center max-w-2xl mb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-      >
-        The ultimate link shortener that not only shortens your URLs but also provides powerful analytics,
-        encryption, and complete control over your links. Simplify, secure, and track your links effortlessly.
-      </motion.p>
-      
-      <Button
-        className="bg-blue-500 hover:bg-blue-600 px-6 py-3 text-lg rounded-lg font-medium"
-        onClick={() => router.push("/dashboard")}
-      >
-        Generate Link Now
-      </Button>
-      
-      <motion.div 
-        className="mt-12"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-      >
-        <Image 
-          src="/landing.jpg" 
-          alt="Link Shortening Illustration" 
-          width={600} 
-          height={400} 
-          className="rounded-lg shadow-lg"
-        />
-      </motion.div>
-      
-      <div className="mt-16 grid md:grid-cols-3 gap-6 w-full max-w-6xl">
-        <Card>
-          <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-semibold mb-2">Track Clicks</h3>
-            <p className="text-gray-300">Monitor how many users clicked on your shortened links in real-time.</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-semibold mb-2">Secure & Encrypted</h3>
-            <p className="text-gray-300">Generate encrypted links to ensure maximum privacy and control.</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-semibold mb-2">Manage Links</h3>
-            <p className="text-gray-300">Dispose of or modify your links whenever you want with ease.</p>
-          </CardContent>
-        </Card>
+    <div className={`min-h-screen flex flex-col justify-center px-6 ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"}`}>
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-10 py-16">
+        <motion.div 
+          className="max-w-lg text-left"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Welcome to <b className="text-violet-900">SimLink</b></h1>
+          <p className="text-lg mb-6">
+            The ultimate link shortener that not only shortens your URLs but also provides powerful analytics,
+            encryption, and complete control over your links. Simplify, secure, and track your links effortlessly.
+          </p>
+          <Button
+            className="relative px-6 py-3 bg-violet-900 hover:bg-violet-700 text-lg rounded-lg font-medium overflow-hidden text-white shadow-md"
+            onClick={() => router.push("/dashboard")}
+          >
+            <span className="absolute bg-violet-900 hover:bg-violet-700"></span>
+            <span className="relative z-10">Generate Link Now</span>
+          </Button>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <Image 
+            src="/landing.jpg" 
+            alt="Link Shortening Illustration" 
+            width={600} 
+            height={400} 
+            className="rounded-lg shadow-lg"
+          />
+        </motion.div>
+      </div>
+
+      <div className="mt-16 grid md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
+        {["Track Clicks", "Secure & Encrypted", "Manage Links"].map((title, i) => (
+          <Card key={i} className="bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 p-6 text-center">
+            <CardContent>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{title}</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {title === "Track Clicks" ? "Monitor your links in real-time." : 
+                 title === "Secure & Encrypted" ? "Ensure maximum privacy and control." : 
+                 "Modify your links with ease."}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );

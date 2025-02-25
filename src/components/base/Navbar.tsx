@@ -35,6 +35,7 @@ export default function Navbar() {
       <div className="flex gap-6">
         <Link href="/" className="text-lg font-semibold">Home</Link>
         <Link href="/dashboard" className="text-lg font-semibold">Dashboard</Link>
+        <Link href="/logs" className="text-lg font-semibold">logs</Link>
       </div>
       <div className="flex items-center gap-4">
         <Button
